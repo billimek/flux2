@@ -25,16 +25,9 @@ fi
 
 # Download linux binary
 BIN_URL="https://github.com/fluxcd/flux2/releases/download/v${VERSION}/flux_${VERSION}_linux_amd64.tar.gz"
-curl -sL $BIN_URL | tar xz
+curl -sL $BIN_URL | tar xz -C /usr/local/bin/
 
-# Copy binary to GitHub runner
-mkdir -p $GITHUB_WORKSPACE/bin
-cp ./flux $GITHUB_WORKSPACE/bin
-chmod +x $GITHUB_WORKSPACE/bin/flux
+# Make binary executable
+chmod +x /usr/local/bin/flux
 
-# Print version
-$GITHUB_WORKSPACE/bin/flux -v
-
-# Add binary to GitHub runner path
-echo "$GITHUB_WORKSPACE/bin" >> $GITHUB_PATH
-echo "$RUNNER_WORKSPACE/$(basename $GITHUB_REPOSITORY)/bin" >> $GITHUB_PATH
+flux -v
