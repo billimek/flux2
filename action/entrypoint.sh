@@ -31,7 +31,11 @@ curl -sL $BIN_URL | tar xz -C "$HOME/bin/"
 # Make binary executable
 chmod +x "$HOME/bin/flux"
 
+echo "(pre) PATH is: $PATH"
+
 # Add binary to GitHub runner path
 echo "$HOME/bin" >> $GITHUB_PATH
 
-flux -v
+echo "(post) PATH is: $PATH"
+
+"$HOME/bin/flux" -v
